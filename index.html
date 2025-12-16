@@ -19,7 +19,6 @@
       text-decoration: none;
     }
     header {
-      /* 全屏 Hero 区 */
       position: relative;
       height: 100vh;
       display: flex;
@@ -69,7 +68,7 @@
       color: #000;
     }
 
-    /* 核心展示区（类似 Projects / Showcase） */
+    /* Showcase 区域 */
     .showcase {
       padding: 4rem 1rem;
       text-align: center;
@@ -77,8 +76,13 @@
     }
     .showcase h2 {
       font-size: 2rem;
+      margin-top: 3rem;
       margin-bottom: 2rem;
       color: #fff;
+    }
+    /* 让第一个标题顶部间距小一点 */
+    .showcase h2:first-of-type {
+      margin-top: 0;
     }
     .showcase table {
       width: 100%;
@@ -99,7 +103,26 @@
       margin: auto;
     }
 
-    /* 关于 / 特性 / 下载等 section */
+    /* 展开按钮样式 */
+    .toggle-btn {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem; /* 增加底部间距，以免跟下一个标题太近 */
+      padding: 0.8rem 2rem;
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+    .toggle-btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    /* 其他 Section */
     .section {
       padding: 4rem 1rem;
       max-width: 900px;
@@ -132,28 +155,105 @@
   <header>
     <div class="hero-content">
       <h1>Wan-Alpha</h1>
-      <p class="subtitle" style="font-size:1.5rem;">High-Quality Text-to-Video Generation with Alpha Channel</p>
+      <p class="subtitle" style="font-size:1.5rem;">Video Generation with Stable Transparency via <br> Shiftable RGB-A Distribution Learner</p>
       <p class="authors" style="font-size:1rem; color:#ccc; margin-top:0.5rem;">
-      <sup>1</sup>Haotian Dong, <sup>2</sup>Wenjing Wang, <sup>2</sup>Chen Li, <sup>1</sup>Di Lin
-      <p class="authors" style="font-size:1rem; color:#ccc; margin-top:0.5rem;"></p>
-      <sup>1</sup>Tianjin University, <sup>2</sup>Individual Researcher
-    </p>
+        <sup>1</sup>Haotian Dong, <sup>2</sup>Wenjing Wang, <sup>2</sup>Chen Li, <sup>2</sup>Jing Lyu, <sup>1</sup>Di Lin
+      </p>
+      <p class="authors" style="font-size:1rem; color:#ccc; margin-top:0.5rem;">
+        <sup>1</sup>Tianjin University, <sup>2</sup>Individual Researcher
+      </p>
       <div class="btn-group">
         <a href="https://arxiv.org/pdf/2509.24979" class="btn">arXiv</a>
         <a href="https://github.com/WeChatCV/Wan-Alpha" class="btn">GitHub</a>
         <a href="https://huggingface.co/htdong/Wan-Alpha" class="btn">HuggingFace</a>
-        <a href="https://huggingface.co/htdong/Wan-Alpha_ComfyUI" class="btn">ComfyUI</a>
+        <a href="https://huggingface.co/htdong/Wan-Alpha-v2.0" class="btn">HuggingFace-v2.0</a>
       </div>
     </div>
-    <!-- <video src="assets/bg.mp4" autoplay muted loop></video> -->
   </header>
 
   <section class="showcase">
-    <h2>🌟 Showcase</h2>
+    <!-- ================= V2.0 Section ================= -->
+    <h2>🌟 Showcase (Wan-Alpha v2.0)</h2>
     <table>
       <tr>
         <th>Prompt</th>
-        <th>Preview Video</th>
+        <th>Generated Video</th>
+        <th>Alpha Video</th>
+      </tr>
+      <tr>
+        <td>"The background of this video is transparent. An aged hand is suspending a glowing, magical crystal ball, within which swirling smoke seems to foreshadow the future. It combines realistic style with fantasy special effects. Close-up shot."</td>
+        <td><img src="assets_2/ball.gif" alt="Generated"></td>
+        <td><img src="assets_2/ball_pha.gif" alt="Alpha"></td>
+      </tr>
+      <tr>
+        <td>"The background of this video is transparent. A small black dog, with fine and thick fur, wags its tail gently, its fur swaying slightly in the wind. Realistic style. Medium shot."</td>
+        <td><img src="assets_2/dog.gif" alt="Generated"></td>
+        <td><img src="assets_2/dog_pha.gif" alt="Alpha"></td>
+      </tr>
+      <tr>
+        <td>"The background of this video is transparent. The edges of the crystal flower petals shimmer with a cool blue-white light, and the center glows faintly. Realistic style. Medium shot."</td>
+        <td><img src="assets_2/flower.gif" alt="Generated"></td>
+        <td><img src="assets_2/flower_pha.gif" alt="Alpha"></td>
+      </tr>
+      <tbody id="more-results-v2.0" style="display: none;">  
+        <tr>
+          <td>"The background of this video is transparent. A gray squirrel, with a fluffy and bushy tail, its fur gently swaying in the wind, is holding a chestnut and nervously looking around. Realistic style. Medium shot."</td>
+          <td><img src="assets_2/squirrel.gif" alt="Generated"></td>
+          <td><img src="assets_2/squirrel_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. A small deer is cautiously grazing at the edge of the forest, its ears perked up attentively, ready to flee at any moment. Realistic style. Medium shot."</td>
+          <td><img src="assets_2/deer.gif" alt="Generated"></td>
+          <td><img src="assets_2/deer_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. The star-shaped light bulb continuously emits a warm orange light; the light is soft and stable. Realistic style. Close-up shot."</td>
+          <td><img src="assets_2/light.gif" alt="Generated"></td>
+          <td><img src="assets_2/light_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. A middle-aged man with gray hair and a beard, wearing a white shirt, is looking seriously at the camera. Realistic style. Close-up shot."</td>
+          <td><img src="assets_2/man.gif" alt="Generated"></td>
+          <td><img src="assets_2/man_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. A giant panda is sitting on the ground, leisurely munching on a bamboo stalk. Realistic style. Medium shot."</td>
+          <td><img src="assets_2/panda.gif" alt="Generated"></td>
+          <td><img src="assets_2/panda_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. It features a beige, woven rattan hanging chair with soft seat and back cushions. Realistic style. Medium shot."</td>
+          <td><img src="assets_2/seat.gif" alt="Generated"></td>
+          <td><img src="assets_2/seat_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. Thick white smoke slowly spreads and swirls in the air, forming various soft, swirling shapes. Realistic style. Medium shot."</td>
+          <td><img src="assets_2/smoke.gif" alt="Generated"></td>
+          <td><img src="assets_2/smoke_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. A miniature dragon (the size of a human hand) is perched on a human finger, and it sneezes, exhaling a small puff of flame. Realistic style. Close-up shot."</td>
+          <td><img src="assets_2/dragon.gif" alt="Generated"></td>
+          <td><img src="assets_2/dragon_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The background of this video is transparent. A hand is touching an invisible force field wall, and blue, hexagonal, honeycomb-like ripples appear where the fingertips make contact, causing the air to distort. Realistic style. Close-up shot, science fiction barrier effect."</td>
+          <td><img src="assets_2/finger.gif" alt="Generated"></td>
+          <td><img src="assets_2/finger_pha.gif" alt="Alpha"></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- V2.0 Button -->
+    <button id="btn-v2.0" class="toggle-btn">Show more results</button>
+
+
+    <!-- ================= V1.0 Section ================= -->
+    <h2>🌟 Showcase (Wan-Alpha v1.0)</h2>
+    <table>
+      <tr>
+        <th>Prompt</th>
+        <th>Generated Video</th>
         <th>Alpha Video</th>
       </tr>
       <tr>
@@ -171,96 +271,90 @@
         <td><img src="assets/bird.gif" alt="Generated"></td>
         <td><img src="assets/bird_pha.gif" alt="Alpha"></td>
       </tr>
-      <tbody id="more-results" style="display: none;">
-      <tr>
-        <td>"Close-up. A candle burns, its flame swaying with the air, and wax slowly drips. The background of this video is transparent. Realistic style."</td>
-        <td><img src="assets/candle.gif" alt="Generated"></td>
-        <td><img src="assets/candle_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. A young boy, wearing tracksuits, drinks water. He has a relaxed expression, holding a clear plastic cup and looking forward. Realistic style. Medium shot. Slight upward angle."</td>
-        <td><img src="assets/littleboy.gif" alt="Generated"></td>
-        <td><img src="assets/littleboy_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. An attractive Asian woman, dressed in a stylish urban business suit, smiles as a gentle breeze rustles her long, flowing black hair, sending strands flying. Her eyes are gentle and vibrant, and a contented smile plays on her lips. Realistic style. Medium shot. Slight upward angle."</td>
-        <td><img src="assets/hair.gif" alt="Generated"></td>
-        <td><img src="assets/hair_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. A man in sportswear drinks water, his expression relaxed, his eyes looking forward. Realistic style. Medium shot."</td>
-        <td><img src="assets/man.gif" alt="Generated"></td>
-        <td><img src="assets/man_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"The video has a transparent background. A woman in a gorgeous gown holds a dimly lit candle, its flame framing her dreamlike silhouette. Her expression is serene, as if she's lost in thought. The video is shot in a romantic, retro style, with a close-up of her body."</td>
-        <td><img src="assets/woman.gif" alt="Generated"></td>
-        <td><img src="assets/woman_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. Realistic style. A woman in casual home clothes elegantly holds a clear glass filled with orange juice. She has warm eyes and soft brown curls. Medium shot."</td>
-        <td><img src="assets/juice.gif" alt="Generated"></td>
-        <td><img src="assets/juice_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. The edges of the crystal flower's petals shimmer with a cool blue-white light, while the center is faintly luminous. Realistic style. Medium shot."</td>
-        <td><img src="assets/flower.gif" alt="Generated"></td>
-        <td><img src="assets/flower_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. A silvery-white halo flickers in a circular pattern, spreading evenly. Realistic style. Medium shot."</td>
-        <td><img src="assets/light.gif" alt="Generated"></td>
-        <td><img src="assets/light_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. A street lamp shade glows orange-red, and the wick flickers. Realistic style. Medium shot."</td>
-        <td><img src="assets/deng.gif" alt="Generated"></td>
-        <td><img src="assets/deng_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. A dark blue furry hat falls, swaying in the air. The brim is covered in dense fur, feeling warm and soft. Realistic style. Medium shot."</td>
-        <td><img src="assets/hat.gif" alt="Generated"></td>
-        <td><img src="assets/hat_pha.gif" alt="Alpha"></td>
-      </tr>
-      <tr>
-        <td>"This video has a transparent background. A black puppy with fine, dense fur sways in the wind, its tail gently wagging. Realistic style. Medium shot."</td>
-        <td><img src="assets/dog.gif" alt="Generated"></td>
-        <td><img src="assets/dog_pha.gif" alt="Alpha"></td>
-      </tr>
-    </tbody>
+      <tbody id="more-results-v1.0" style="display: none;">
+        <tr>
+          <td>"Close-up. A candle burns, its flame swaying with the air, and wax slowly drips. The background of this video is transparent. Realistic style."</td>
+          <td><img src="assets/candle.gif" alt="Generated"></td>
+          <td><img src="assets/candle_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. A young boy, wearing tracksuits, drinks water. He has a relaxed expression, holding a clear plastic cup and looking forward. Realistic style. Medium shot. Slight upward angle."</td>
+          <td><img src="assets/littleboy.gif" alt="Generated"></td>
+          <td><img src="assets/littleboy_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. An attractive Asian woman, dressed in a stylish urban business suit, smiles as a gentle breeze rustles her long, flowing black hair, sending strands flying. Her eyes are gentle and vibrant, and a contented smile plays on her lips. Realistic style. Medium shot. Slight upward angle."</td>
+          <td><img src="assets/hair.gif" alt="Generated"></td>
+          <td><img src="assets/hair_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. A man in sportswear drinks water, his expression relaxed, his eyes looking forward. Realistic style. Medium shot."</td>
+          <td><img src="assets/man.gif" alt="Generated"></td>
+          <td><img src="assets/man_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"The video has a transparent background. A woman in a gorgeous gown holds a dimly lit candle, its flame framing her dreamlike silhouette. Her expression is serene, as if she's lost in thought. The video is shot in a romantic, retro style, with a close-up of her body."</td>
+          <td><img src="assets/woman.gif" alt="Generated"></td>
+          <td><img src="assets/woman_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. Realistic style. A woman in casual home clothes elegantly holds a clear glass filled with orange juice. She has warm eyes and soft brown curls. Medium shot."</td>
+          <td><img src="assets/juice.gif" alt="Generated"></td>
+          <td><img src="assets/juice_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. The edges of the crystal flower's petals shimmer with a cool blue-white light, while the center is faintly luminous. Realistic style. Medium shot."</td>
+          <td><img src="assets/flower.gif" alt="Generated"></td>
+          <td><img src="assets/flower_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. A silvery-white halo flickers in a circular pattern, spreading evenly. Realistic style. Medium shot."</td>
+          <td><img src="assets/light.gif" alt="Generated"></td>
+          <td><img src="assets/light_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. A street lamp shade glows orange-red, and the wick flickers. Realistic style. Medium shot."</td>
+          <td><img src="assets/deng.gif" alt="Generated"></td>
+          <td><img src="assets/deng_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. A dark blue furry hat falls, swaying in the air. The brim is covered in dense fur, feeling warm and soft. Realistic style. Medium shot."</td>
+          <td><img src="assets/hat.gif" alt="Generated"></td>
+          <td><img src="assets/hat_pha.gif" alt="Alpha"></td>
+        </tr>
+        <tr>
+          <td>"This video has a transparent background. A black puppy with fine, dense fur sways in the wind, its tail gently wagging. Realistic style. Medium shot."</td>
+          <td><img src="assets/dog.gif" alt="Generated"></td>
+          <td><img src="assets/dog_pha.gif" alt="Alpha"></td>
+        </tr>
+      </tbody>
     </table>
-    <!-- 展开按钮 -->
-  <button id="toggle-results" style="
-    margin-top: 1.5rem;
-    padding: 0.8rem 2rem;
-    background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-  ">
-    Show more results
-  </button>
-</section>
+    
+    <button id="btn-v1.0" class="toggle-btn">Show more results</button>
 
-<script>
-  const btn = document.getElementById("toggle-results");
-  const moreResults = document.getElementById("more-results");
+  </section>
 
-  btn.addEventListener("click", () => {
-    if (moreResults.style.display === "none") {
-      moreResults.style.display = "table-row-group";
-      btn.textContent = "Show less results";
-    } else {
-      moreResults.style.display = "none";
-      btn.textContent = "Show more results";
+  <script>
+    function setupToggle(buttonId, contentId) {
+      const btn = document.getElementById(buttonId);
+      const content = document.getElementById(contentId);
+
+      if (btn && content) {
+        btn.addEventListener("click", () => {
+          if (content.style.display === "none") {
+            content.style.display = "table-row-group";
+            btn.textContent = "Show less results";
+          } else {
+            content.style.display = "none";
+            btn.textContent = "Show more results";
+          }
+        });
+      }
     }
-  });
-</script>
 
-
+    setupToggle("btn-v2.0", "more-results-v2.0");
+    setupToggle("btn-v1.0", "more-results-v1.0");
+  </script>
 
   <section class="section">
     <h2>🤝 Acknowledgements</h2>
@@ -272,9 +366,9 @@
     </ul>
   </section>
 
-
-
-
+  <footer>
+    <p>© 2025 WeChat Vision, Tencent Inc. All Rights Reserved.</p>
+  </footer>
 
 </body>
 </html>
